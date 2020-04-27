@@ -61,7 +61,7 @@ async function auto_scroll(page) {
           clearInterval(timer);
           resolve();
         }
-      }, 1000);
+      }, 500);
     });
   });
 }
@@ -117,36 +117,41 @@ const process_completed = async (browser, options, data) => {
       PAGE_WAIT_COMPLETED
     );
 
-  //   newdata = await page.evaluate(() => {
-  //     let result = {};
+    newdata = await page.evaluate(() => {
+      let result = {};
 
-  //     // parse: 'Learning History (108)'
-  //     let count = document.querySelector(".me__content-tab--completed")
-  //       .innerText;
-  //     result["count"] = count.replace(")", "").split("(")[1];
-  //     return result;
-  //   });
+      // parse: '104 Courses'
+      let count = document.querySelector("#course-count")
+        .innerText;
+      result["count"] = count.split(" ")[0];
+      return result;
+    });
 
-  //   // check for optimization, of count is same, then we are done.
-  //   if (!options.forceFullGather && sampleData["count"] == newdata["count"]) {
-  //     console.log("same expected course count, nothing to do.");
-  //     data["completed-courses"] = [];
-  //     return;
-  //   }
+    // check for optimization, of count is same, then we are done.
+    if (!options.forceFullGather && sampleData["count"] == newdata["count"]) {
+      console.log("same expected course count, nothing to do.");
+      data["completed-courses"] = [];
+      return;
+    }
 
-  //   if (options.scrollToBottom) {
-  //     await auto_scroll(page);
-  //   }
-  //   await base.delay(PAGE_WAIT_COMPLETED);
-  //   await base.process_options(browser, options);
+    if (options.scrollToBottom) {
+      try {
+        while (true) {
+          await auto_scroll(page);
+          await page.click("#show-more-history");    
+        }
+      } catch {}
+    }
+    await base.delay(PAGE_WAIT_COMPLETED);
+    await base.process_options(browser, options);
 
-  //   newdata = await page.evaluate(() => {
-  //     let result = {};
+    newdata = await page.evaluate(() => {
+      let result = {};
 
-  //     // parse: 'Learning History (108)'
-  //     let count = document.querySelector(".me__content-tab--completed")
-  //       .innerText;
-  //     result["count"] = count.replace(")", "").split("(")[1];
+      // parse: 'Learning History (108)'
+      let count = document.querySelector("#course-count")
+        .innerText;
+      result["count"] = count.split(" ")[0];
 
   //     // course links
   //     result["links"] = [
@@ -181,8 +186,8 @@ const process_completed = async (browser, options, data) => {
   //       ...document.querySelectorAll(".lls-card-entity-thumbnails__image img")
   //     ].map(elem => elem.src);
 
-  //     return result;
-  //   });
+      return result;
+    });
 
   //   // assemble nested data from lists, assume collated
   //   var length;
@@ -223,9 +228,9 @@ const process_completed = async (browser, options, data) => {
   //     }
   //   }
 
-  //   if (options.saveSampleData) {
-  //     fs.writeFileSync(SAMPLE_FILE, JSON.stringify(newdata, null, 2));
-  //   }
+    if (options.saveSampleData) {
+      fs.writeFileSync(SAMPLE_FILE, JSON.stringify(newdata, null, 2));
+    }
   }
 
    data["completed-courses"] = [];
