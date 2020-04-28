@@ -9,7 +9,11 @@ A tool to gather Lynda.com classes completed along with details.
 
 ## TODO
 
-- navigate into each for details (later)
+- scroll down history page
+- parse each "card"
+  - title, author, description, details, completed, link
+  - (need navigation) 
+  - release
   - course details
   - author LinkedIn link
   - course toc
@@ -24,22 +28,14 @@ A tool to gather Lynda.com classes completed along with details.
 
 - need to programatically deal with "not completed" tags (how to align)
 
+- fix GH Action to deploy
 - improve index.html
     - summary info (name, toc, li link, number courses, sum time etc)
     - better style
 - improve .md
 - test with headless
 
-- copy the thimbnail images?
-
-
-- set up with GH Actions to run "update" with docker/ubuntu18/node12...
-    - get
-    - yarn install
-    - yarn start
-    - verify index
-    - commit /public  /artifacts (.md)
-
+- compare to pup-learning to capture those improvements
 
 
 ## Mac Install
