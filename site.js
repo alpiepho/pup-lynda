@@ -148,107 +148,54 @@ const process_completed = async (browser, options, data) => {
     newdata = await page.evaluate(() => {
       let result = {};
 
-      // parse: 'Learning History (108)'
+      // parse: '104 Courses'
       let count = document.querySelector("#course-count")
         .innerText;
       result["count"] = count.split(" ")[0];
 
-  //     // course links
-  //     result["links"] = [
-  //       ...document.querySelectorAll(
-  //         ".lls-card-detail-card-body__headline a.card-entity-link"
-  //       )
-  //     ].map(elem => elem.href);
-  //     result["titles"] = [
-  //       ...document.querySelectorAll(
-  //         ".lls-card-detail-card-body__headline a.card-entity-link"
-  //       )
-  //     ].map(elem => elem.innerText);
-  //     result["authors"] = [
-  //       ...document.querySelectorAll(
-  //         ".lls-card-detail-card-body__primary-metadata .lls-card-authors span"
-  //       )
-  //     ].map(elem => elem.innerText);
-  //     result["released"] = [
-  //       ...document.querySelectorAll(
-  //         ".lls-card-detail-card-body__primary-metadata span.lls-card-released-on"
-  //       )
-  //     ].map(elem => elem.innerText);
-  //     result["duration"] = [
-  //       ...document.querySelectorAll("span.lls-card-duration-label")
-  //     ].map(elem => elem.innerText);
-  //     result["completed"] = [
-  //       ...document.querySelectorAll(
-  //         ".lls-card-detail-card-body__footer span.lls-card-completion-state--completed"
-  //       )
-  //     ].map(elem => elem.innerText);
-  //     result["imgs"] = [
-  //       ...document.querySelectorAll(".lls-card-entity-thumbnails__image img")
-  //     ].map(elem => elem.src);
-
+      result['completed-courses'] = []
+      let card_conts = document.querySelectorAll(".card-cont");
+      for (i=0; i<card_conts.length; i++) {
+        let entry = {};
+        entry['title'] = "";
+        entry['link'] = "";
+        entry['author'] = "";
+        entry['released-date'] = "";
+        entry['duration'] = "";
+        entry['completed-date'] = "";
+        entry['img'] = "";
+        entry['linkedin'] = "";
+        entry['details'] = "";
+        entry['title'] = card_conts[i].querySelector('h3').innerText;
+        entry['link'] = card_conts[i].querySelector('a').href;
+        temp = card_conts[i].querySelector('.meta-author');
+        if (temp) entry['author'] = temp.innerText;
+        //entry["released-date"] = newdata["released"][i];
+        //if (temp) entry['released-date'] = temp;
+        temp = card_conts[i].querySelector('.meta-duration');
+        if (temp) entry['duration'] = temp.innerText;
+        temp = card_conts[i].querySelector('.access-date');
+        if (temp) entry['completed-date'] = temp.innerText;
+        temp = card_conts[i].querySelector('img');
+        if (temp) entry['img'] = temp.src;
+        //entry["linkedin"] = newdata["linkedin"][i];
+        //if (temp) entry['linkedin'] = temp;
+        temp = card_conts[i].querySelector('.meta-description');
+        if (temp) entry['details'] = temp.innerText;
+        temp = card_conts[i].querySelector('.view-certificate');
+        if (temp) {
+          result['completed-courses'].push(entry);
+        }
+      }
       return result;
     });
-
-  //   // assemble nested data from lists, assume collated
-  //   var length;
-  //   let expectedCount = parseInt(newdata["count"]);
-  //   length = newdata["links"].length;
-  //   if (length != expectedCount)
-  //     console.log("WARNING: links.length %d != %d", length, expectedCount);
-  //   length = newdata["titles"].length;
-  //   if (length != expectedCount)
-  //     console.log("WARNING: titles.length %d != %d", length, expectedCount);
-  //   length = newdata["authors"].length;
-  //   if (length != expectedCount)
-  //     console.log("WARNING: authors.length %d != %d", length, expectedCount);
-  //   length = newdata["released"].length;
-  //   if (length != expectedCount)
-  //     console.log("WARNING: released.length %d != %d", length, expectedCount);
-  //   length = newdata["duration"].length;
-  //   if (length != expectedCount)
-  //     console.log("WARNING: links.duration %d != %d", length, expectedCount);
-  //   length = newdata["completed"].length;
-  //   if (length != expectedCount)
-  //     console.log("WARNING: links.completed %d != %d", length, expectedCount);
-  //   length = newdata["imgs"].length;
-  //   if (length != expectedCount)
-  //     console.log("WARNING: links.imgs %d != %d", length, expectedCount);
-
-  //   newdata["linkedin"] = [];
-  //   newdata["details"] = [];
-  //   if (options.gatherDetails) {
-  //     for (i = 0; i < newdata["links"].length; i++) {
-  //       [temp1, temp2] = await process_course_details(
-  //         browser,
-  //         options,
-  //         newdata["links"][i]
-  //       );
-  //       newdata["linkedin"].push(temp1);
-  //       newdata["details"].push(temp2);
-  //     }
-  //   }
 
     if (options.saveSampleData) {
       fs.writeFileSync(SAMPLE_FILE, JSON.stringify(newdata, null, 2));
     }
   }
 
-   data["completed-courses"] = [];
-  // for (i = 0; i < newdata["links"].length; i++) {
-  //   entry = {};
-  //   if (newdata["titles"][i]) {
-  //     entry["title"] = newdata["titles"][i];
-  //     entry["link"] = newdata["links"][i];
-  //     entry["author"] = newdata["authors"][i];
-  //     entry["released-date"] = newdata["released"][i];
-  //     entry["duration"] = newdata["duration"][i];
-  //     entry["completed-date"] = newdata["completed"][i];
-  //     entry["img"] = newdata["imgs"][i];
-  //     entry["linkedin"] = newdata["linkedin"][i];
-  //     entry["details"] = newdata["details"][i];
-  //     data["completed-courses"].push(entry);
-  //   }
-  // }
+   data["completed-courses"] = newdata["completed-courses"];
   //console.log("process_completed done");
 };
 

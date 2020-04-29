@@ -9,12 +9,9 @@ A tool to gather Lynda.com classes completed along with details.
 
 ## TODO
 
-- scroll down history page
 - parse each "card"
-  - title, author, description, details, completed, link
   - (need navigation) 
   - release
-  - course details
   - author LinkedIn link
   - course toc
     - sections
@@ -22,13 +19,10 @@ A tool to gather Lynda.com classes completed along with details.
       - subsections
         - title
         - description
-        - durration
+        - duration
   - course exercise files?
   - **could** also grab transcript???
 
-- need to programatically deal with "not completed" tags (how to align)
-
-- fix GH Action to deploy
 - improve index.html
     - summary info (name, toc, li link, number courses, sum time etc)
     - better style
