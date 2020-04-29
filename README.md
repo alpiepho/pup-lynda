@@ -9,8 +9,7 @@ A tool to gather Lynda.com classes completed along with details.
 
 ## TODO
 
-- parse each "card"
-  - (need navigation) 
+- navigate to each page
   - release
   - author LinkedIn link
   - course toc
