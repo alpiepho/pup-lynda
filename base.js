@@ -69,23 +69,6 @@ const browser_get = async (browser, href, waitTime) => {
   return page;
 };
 
-// const browser_get_retries = async (browser, href, waitTime, retries) => {
-//   let page;
-//   for (let i = 0; i < retries; i++) {
-//     try {
-//       console.log("browser_get " + href);
-//       //const page = await browser.newPage();
-//       page = (await browser.pages())[0];
-//       await page.goto(href);
-//       await delay(waitTime);
-//     } catch (err) {
-//       if (waitTime == 0) waitTime = 1000;
-//       else waitTime = waitTime * 2;
-//     }
-//   }
-//   return page;
-// };
-
 const browser_close = async browser => {
   //console.log('browser_close')
   if (options.useSampleData) {
@@ -115,6 +98,5 @@ exports.random_int = random_int;
 exports.delay = delay;
 exports.browser_init = browser_init;
 exports.browser_get = browser_get;
-//exports.browser_get_retries = browser_get_retries;
 exports.browser_close = browser_close;
 exports.process_options = process_options;

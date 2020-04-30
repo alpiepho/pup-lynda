@@ -7,29 +7,6 @@ Deployed on GitHub pages [here](https://alpiepho.github.io/pup-lynda/).
 
 A tool to gather Lynda.com classes completed along with details.
 
-## TODO
-
-- navigate to each page
-  - release
-  - author LinkedIn link
-  - course toc
-    - sections
-      - title
-      - subsections
-        - title
-        - description
-        - duration
-  - course exercise files?
-  - **could** also grab transcript???
-
-- improve index.html
-    - summary info (name, toc, li link, number courses, sum time etc)
-    - better style
-- improve .md
-- test with headless
-
-- compare to pup-learning to capture those improvements
-
 
 ## Mac Install
 

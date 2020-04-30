@@ -18,6 +18,7 @@ PAGE_WAIT_DETAILS = 1000;
 
 const SAMPLE_FILE = "./artifacts/sample.json";
 
+
 const sampleData = require(SAMPLE_FILE);
 
 const process_login = async (browser, options) => {
@@ -28,11 +29,11 @@ const process_login = async (browser, options) => {
   //console.log('process_login')
   const page = await base.browser_get(browser, PUP_URL_LOGIN, waitMs);
   await base.process_options(browser, options);
-  await page.type("#card-number", process.env.PUP_USERNAME);
+  await page.type('#card-number', process.env.PUP_USERNAME);
   await base.delay(waitMs);
-  await page.type("#card-pin", process.env.PUP_PASSWORD);
+  await page.type('#card-pin', process.env.PUP_PASSWORD);
   await base.delay(waitMs);
-  await page.click("#submit-library-card");
+  await page.click('#submit-library-card');
   await base.delay(PAGE_WAIT_LOGIN_DONE);
   await base.process_options(browser, options);
   //console.log("process_login done")
@@ -66,43 +67,6 @@ async function auto_scroll(page) {
   });
 }
 
-// const process_course_details = async (browser, options, href) => {
-//   //console.log("process_course_details");
-//   var newdata;
-
-//   const page = await base.browser_get(browser, href, PAGE_WAIT_DETAILS);
-
-//   newdata = await page.evaluate(() => {
-//     let result = {};
-//     // parse: courses
-//     // TODO:
-//     //  - course details
-//     //  - author LinkedIn link
-//     //  - course toc
-//     //    - sections
-//     //      - title
-//     //      - subsections
-//     //        - title
-//     //        - description
-//     //        - durration
-//     //  - course exercise files?
-//     //  - **could** also grab transcript???
-
-//     result['linkedin'] = "";
-//     result['details'] = "";
-//     a = document.querySelectorAll('a.course-author-entity__meta-action');
-//     if (a.length) {
-//       result['linkedin'] = a[0].href;
-//     }
-//     a = document.querySelectorAll('.classroom-layout-panel-layout__main p');
-//     if (a.length) {
-//       result['details'] = a[0].innerText;
-//     }
-//     return result;
-//   });
-//   return [newdata['linkedin'], newdata['details']];
-//   //console.log("process_course_details done");
-// };
 
 const process_completed = async (browser, options, data) => {
   //console.log("process_completed");
@@ -121,16 +85,15 @@ const process_completed = async (browser, options, data) => {
       let result = {};
 
       // parse: '104 Courses'
-      let count = document.querySelector("#course-count")
-        .innerText;
-      result["count"] = count.split(" ")[0];
+      let count = document.querySelector('#course-count').innerText;
+      result['count'] = count.split(' ')[0];
       return result;
     });
 
     // check for optimization, of count is same, then we are done.
-    if (!options.forceFullGather && sampleData["count"] == newdata["count"]) {
+    if (!options.forceFullGather && sampleData['count'] == newdata['count']) {
       console.log("same expected course count, nothing to do.");
-      data["completed-courses"] = [];
+      data['completed-courses'] = [];
       return;
     }
 
@@ -138,7 +101,7 @@ const process_completed = async (browser, options, data) => {
       try {
         while (true) {
           await auto_scroll(page);
-          await page.click("#show-more-history");    
+          await page.click('#show-more-history');    
         }
       } catch {}
     }
@@ -149,23 +112,22 @@ const process_completed = async (browser, options, data) => {
       let result = {};
 
       // parse: '104 Courses'
-      let count = document.querySelector("#course-count")
-        .innerText;
-      result["count"] = count.split(" ")[0];
+      let count = document.querySelector('#course-count').innerText;
+      result['count'] = count.split(' ')[0];
 
       result['completed-courses'] = []
-      let card_conts = document.querySelectorAll(".card-cont");
+      let card_conts = document.querySelectorAll('.card-cont');
       for (i=0; i<card_conts.length; i++) {
         let entry = {};
-        entry['title'] = "";
-        entry['link'] = "";
-        entry['author'] = "";
-        entry['released-date'] = "";
-        entry['duration'] = "";
-        entry['completed-date'] = "";
-        entry['img'] = "";
-        entry['linkedin'] = "";
-        entry['details'] = "";
+        entry['title'] = '';
+        entry['link'] = '';
+        entry['author'] = '';
+        entry['released-date'] = '';
+        entry['duration'] = '';
+        entry['completed-date'] = '';
+        entry['img'] = '';
+        entry['linkedin'] = '';
+        entry['details'] = '';
         entry['title'] = card_conts[i].querySelector('h3').innerText;
         entry['link'] = card_conts[i].querySelector('a').href;
         temp = card_conts[i].querySelector('.meta-author');
@@ -195,9 +157,11 @@ const process_completed = async (browser, options, data) => {
     }
   }
 
-   data["completed-courses"] = newdata["completed-courses"];
+   data['completed-courses'] = newdata['completed-courses'];
   //console.log("process_completed done");
 };
+
+
 
 exports.process_login = process_login;
 exports.process_logout = process_logout;
