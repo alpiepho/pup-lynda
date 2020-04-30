@@ -133,7 +133,7 @@ function build_md(data, totalH, totalM) {
     mdStr += "\n";
     mdStr += "[" + entry['title'] + "](" + entry['link'] + ")\n";
     mdStr += "- Author: " + entry['author'] + "\n";
-    mdStr += "- Released: " + entry['released-date'] + "\n";
+    //mdStr += "- Released: " + entry['released-date'] + "\n";
     mdStr += "- Duration: " + entry['duration'] + "\n";
     mdStr += "- Completed: " + entry['completed-date'] + "\n";
     mdStr += "- Details: " + entry['details'] + "\n";
