@@ -175,7 +175,7 @@ const process_completed = async (browser, options, data) => {
         temp = card_conts[i].querySelector('.meta-duration');
         if (temp) entry['duration'] = temp.innerText;
         temp = card_conts[i].querySelector('.access-date');
-        if (temp) entry['completed-date'] = temp.innerText;
+        if (temp) entry['completed-date'] = temp.innerText.replace('Last Viewed: ','');
         temp = card_conts[i].querySelector('img');
         if (temp) entry['img'] = temp.src;
         //entry["linkedin"] = newdata["linkedin"][i];

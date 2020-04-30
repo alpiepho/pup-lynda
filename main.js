@@ -4,7 +4,7 @@ base = require('./base');
 site = require('./site');
 
 const HTML_FILE = "./public/index.html";
-const MD_FILE = "./artifacts/lynda-summary.md";
+const MD_FILE = "./artifacts/lynda-summary.mdx";
 
 const html1 = `
 <!DOCTYPE html>
@@ -42,7 +42,7 @@ description: "Summary of my Lynda.com Completed Courses"
 ---
 
 (Warning: many images) This a summary of all the Lynda.com courses I have completed. 
-This is just the direct  Lynda.com courses.  This list of for historical purposes, since
+This is just the direct  Lynda.com courses.  This list is for historical purposes, since
 most of current courses are on "LinkedIn Learning", after subscribing to the LinkedIn 
 premium plan.
 
@@ -55,24 +55,29 @@ const md2 = `
 
 function build_hours_minutes(data) {
   // Derive timestamps and duration, sort
-  let totalMin = 0;
+  let totalSec = 0;
   data['completed-courses'].forEach(entry => {
     // assume "An Bm" or "Bm"
-    let temp = entry['duration'].split(' ');
-    if (temp.length == 2) {
-      val = parseInt(temp[0].replace('h', ''));
-      totalMin += val*60;
-      val = parseInt(temp[1].replace('m', ''));
-      totalMin += val;
-    }
-    if (temp.length == 1) {
-      val = parseInt(temp[0].replace('m', ''));
-      totalMin += val;      
+    let parts = entry['duration'].split(' ');
+    for (i=0; i<parts.length; i++) {
+      if (parts[i].includes('h')) {
+        val = parseInt(parts[i].replace('h', ''));
+        totalSec += val*60*60; 
+      }
+      if (parts[i].includes('m')) {
+        val = parseInt(parts[i].replace('m', ''));
+        totalSec += val*60; 
+      }
+      if (parts[i].includes('s')) {
+        val = parseInt(parts[i].replace('s', ''));
+        totalSec += val; 
+      }
     }
     entry['released-ts'] = Date.parse(entry['released-date']);
     entry['completed-ts'] = Date.parse(entry['completed-date']);
   });
 
+  let totalMin = Math.floor(totalSec / 60);
   totalH = Math.floor(totalMin / 60); 
   totalM = totalMin - (totalH*60);
   return [totalH, totalM];
@@ -102,7 +107,7 @@ function build_html(data, totalH, totalM) {
     }
     htmlStr += "                <li>" + entry['released-date'] + "</li>\n";
     htmlStr += "                <li>" + entry['duration'] + "</li>\n";
-    htmlStr += "                <li>" + entry['completed-date'] + "</li>\n";
+    htmlStr += "                <li>Completed: " + entry['completed-date'] + "</li>\n";
     htmlStr += "                <li class=\"details\">" + entry['details'] + "</li>\n";
     htmlStr += "              </ul>\n";
     htmlStr += "            </li>\n";
@@ -127,10 +132,11 @@ function build_md(data, totalH, totalM) {
     }
     mdStr += "\n";
     mdStr += "[" + entry['title'] + "](" + entry['link'] + ")\n";
-    mdStr += "- " + entry['author'] + "\n";
-    mdStr += "- " + entry['released-date'] + "\n";
-    mdStr += "- " + entry['duration'] + "\n";
-    mdStr += "- " + entry['completed-date'] + "\n";
+    mdStr += "- Author: " + entry['author'] + "\n";
+    mdStr += "- Released: " + entry['released-date'] + "\n";
+    mdStr += "- Duration: " + entry['duration'] + "\n";
+    mdStr += "- Completed: " + entry['completed-date'] + "\n";
+    mdStr += "- Details: " + entry['details'] + "\n";
     mdStr += "<br/>\n";
     mdStr += "<br/>\n";
     mdStr += "<br/>\n";
@@ -176,89 +182,6 @@ const main = async () => {
     data['completed-courses'].sort((a, b) => (a['completed-ts'] < b['completed-ts']) ? 1 : -1) // decending
     build_html(data, totalH, totalM);
     build_md(data, totalH, totalM);
-
-    //   // Derive timestamps and duration, sort
-    // let totalMin = 0;
-    // data['completed-courses'].forEach(entry => {
-    //   // assume "An Bm" or "Bm"
-    //   let temp = entry['duration'].split(' ');
-    //   if (temp.length == 2) {
-    //     val = parseInt(temp[0].replace('h', ''));
-    //     totalMin += val*60;
-    //     val = parseInt(temp[1].replace('m', ''));
-    //     totalMin += val;
-    //   }
-    //   if (temp.length == 1) {
-    //     val = parseInt(temp[0].replace('m', ''));
-    //     totalMin += val;      
-    //   }
-    //   entry['released-ts'] = Date.parse(entry['released-date']);
-    //   entry['completed-ts'] = Date.parse(entry['completed-date']);
-    // });
-
-    // totalH = Math.floor(totalMin / 60); 
-    // totalM = totalMin - (totalH*60);
-
-
-
-
-    // // generate artifacts from data - html
-    // let htmlStr = html1;
-    // htmlStr += "      <p>Totals - Course: " + data['completed-courses'].length + ", Time: " + totalH + "h " + totalM + "m</p><br/>\n\n";
-    // htmlStr += "      <ul>";
-    // data['completed-courses'].forEach(entry => {
-    //   htmlStr += "            <li>\n";
-    //   htmlStr += "              <ul>\n";
-    //   htmlStr += "                <li>\n";
-
-    //   htmlStr += "                  <p><img src=\"" + entry['img'] + "\"</img></p>\n";
-
-
-    //   htmlStr += "                  <a target=\"_blank\" href=\"" + entry['link'] + "\">\n";
-    //   htmlStr += "                    " + entry['title'] + "\n";
-    //   htmlStr += "                  </a>\n";
-    //   htmlStr += "                </li>\n";
-    //   if (entry['linkedin']) {
-    //     htmlStr += "                <li><a target=\"_blank\" href=\"" + entry['linkedin'] + "\">" + entry['author'] + "</a></li>\n";
-    //   } else {
-    //     htmlStr += "                <li>" + entry['author'] + "</li>\n";
-    //   }
-    //   htmlStr += "                <li>" + entry['released-date'] + "</li>\n";
-    //   htmlStr += "                <li>" + entry['duration'] + "</li>\n";
-    //   htmlStr += "                <li>" + entry['completed-date'] + "</li>\n";
-    //   htmlStr += "                <li class=\"details\">" + entry['details'] + "</li>\n";
-    //   htmlStr += "              </ul>\n";
-    //   htmlStr += "            </li>\n";
-    // });
-    // htmlStr += "      </ul>";
-    // htmlStr += html2;
-    // fs.writeFileSync(HTML_FILE, htmlStr);
-    
-    // // generate markdown (.mdx) for blog
-    // let mdStr = md1;
-    // mdStr += "Total Completed Courses: " + data['completed-courses'].length + ", Time: " + totalH + "h " + totalM + "m\n";
-    // mdStr += "<br/>\n";
-    // mdStr += "<br/>\n";
-    // mdStr += "<br/>\n";
-    // mdStr += "\n";
-    // data['completed-courses'].forEach(entry => {
-    //   mdStr += "\n";
-    //   if (entry['img']) {
-    //     mdStr += "![thumbnail](" + entry['img'] + ")\n";
-    //   }
-    //   mdStr += "\n";
-    //   mdStr += "[" + entry['title'] + "](" + entry['link'] + ")\n";
-    //   mdStr += "- " + entry['author'] + "\n";
-    //   mdStr += "- " + entry['released-date'] + "\n";
-    //   mdStr += "- " + entry['duration'] + "\n";
-    //   mdStr += "- " + entry['completed-date'] + "\n";
-    //   mdStr += "<br/>\n";
-    //   mdStr += "<br/>\n";
-    //   mdStr += "<br/>\n";
-    //     mdStr += "\n";
-    // });
-    // mdStr += md2;
-    // fs.writeFileSync(MD_FILE, mdStr);
   }
 
   console.log("done.");
