@@ -7,6 +7,17 @@ Deployed on GitHub pages [here](https://alpiepho.github.io/pup-lynda/).
 
 A tool to gather Lynda.com classes completed along with details.
 
+When run as a Node.js tool, it will parse all the Completed Courses of the configured
+user, It will save that data as ./artifact/sample/json, and it will generate
+
+- public/index.html
+- artifacts/lynda-summary.mdx
+
+The associated GH Action will deploy the index.html file.  
+
+The learning-summary.mdx can be manually copied to the my-blog2 directory and committed 
+to that repo as post in the blog.
+
 
 ## Mac Install
 
@@ -70,9 +81,15 @@ be used for automated testing.  This works with both Chrome and Firefox.
 
 This feature allows capturing an image of the web page while the test is running. 
 
+### Local Test of index.html
+
+- cd public
+- python -m SimpleHTTPServer
+- open http://localhost:8000/
+
 ## Know Issues
 
-TBD
+- options must be set in code
 
 
 ## Some References

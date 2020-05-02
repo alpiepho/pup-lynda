@@ -5,6 +5,7 @@ site = require('./site');
 
 const HTML_FILE = "./public/index.html";
 const MD_FILE = "./artifacts/lynda-summary.mdx";
+const SCREENSHOT_DIR = "./screenshots";
 
 const html1 = `
 <!DOCTYPE html>
@@ -26,10 +27,11 @@ const html1 = `
   <body class="body">
     <main>
     <article class="page">
-      <h1>Lynda.com Courses Completed</h1>
+      <h1 id=\"top\">Lynda.com Courses Completed</h1>
 `;
 
 const html2 = `
+    <div id=\"bottom\"></div>
     </article>
   </body>
 </html>
@@ -48,9 +50,13 @@ premium plan.
 
 A full summary with more details can be found [here](https://alpiepho.github.io/pup-lynda/).
 
+#### top
+
 `;
 
 const md2 = `
+
+#### bottom
 `;
 
 function build_hours_minutes(data) {
@@ -87,7 +93,7 @@ function build_html(data, totalH, totalM) {
   // generate artifacts from data - html
   let htmlStr = html1;
   htmlStr += "      <p>Totals - Course: " + data['completed-courses'].length + ", Time: " + totalH + "h " + totalM + "m</p><br/>\n\n";
-  htmlStr += "      <ul>";
+  htmlStr += "      <ul>\n";
   data['completed-courses'].forEach(entry => {
     htmlStr += "            <li>\n";
     htmlStr += "              <ul>\n";
@@ -103,12 +109,13 @@ function build_html(data, totalH, totalM) {
     if (entry['linkedin']) {
       htmlStr += "                <li><a target=\"_blank\" href=\"" + entry['linkedin'] + "\">" + entry['author'] + "</a></li>\n";
     } else {
-      htmlStr += "                <li>" + entry['author'] + "</li>\n";
+      htmlStr += "                <li>Author: " + entry['author'] + "</li>\n";
     }
-    htmlStr += "                <li>" + entry['released-date'] + "</li>\n";
-    htmlStr += "                <li>" + entry['duration'] + "</li>\n";
+    htmlStr += "                <li>Released: " + entry['released-date'] + "</li>\n";
+    htmlStr += "                <li>Duration: " + entry['duration'] + "</li>\n";
     htmlStr += "                <li>Completed: " + entry['completed-date'] + "</li>\n";
     htmlStr += "                <li class=\"details\">" + entry['details'] + "</li>\n";
+    htmlStr += "                <li><a href=\"#top\">top</a> / <a href=\"#bottom\">bottom</a></li>\n";
     htmlStr += "              </ul>\n";
     htmlStr += "            </li>\n";
   });
@@ -137,6 +144,8 @@ function build_md(data, totalH, totalM) {
     mdStr += "- Duration: " + entry['duration'] + "\n";
     mdStr += "- Completed: " + entry['completed-date'] + "\n";
     mdStr += "- Details: " + entry['details'] + "\n";
+    mdStr += "- [top](#top) / [bottom](#bottom)\n";
+
     mdStr += "<br/>\n";
     mdStr += "<br/>\n";
     mdStr += "<br/>\n";
@@ -157,7 +166,7 @@ const main = async () => {
     useSampleData:   false,     // skip browser and use sample data file
     saveSampleData:   true,     // save to sample data file
     screenshot:      false,     // take snapshots
-    screenshotDir:    "/tmp/pup_lynda_screenshots"
+    screenshotDir:   SCREENSHOT_DIR
   }
   const browser = await base.browser_init(options);
   if (!options.useSampleData) {
