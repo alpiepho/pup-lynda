@@ -63,9 +63,9 @@
       "released-date": "",
       "duration": "3h 38m",
       "completed-date": "Mar 17, 2019",
-      "img": "https://cdn.lynda.com/courses/189402-637199587815870493_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/189402-637242272403021455_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "Get up and running with the latest version of PowerShell in these PowerShell 5 tutorials. Learn how to use modules, script and automate tasks, and use remote management to..."
+      "details": "Get up and running with the latest version of PowerShell. Learn how to use modules, script and automate tasks, and use remote management to control thousands of machines."
     },
     {
       "title": "Windows Server 2019 Essential Training",
@@ -74,7 +74,7 @@
       "released-date": "",
       "duration": "3h 18m",
       "completed-date": "Mar 15, 2019",
-      "img": "https://cdn.lynda.com/courses/761950-637230682582961978_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/761950-637244591399652767_270x480_thumb.jpg",
       "linkedin": "",
       "details": "Learn the essentials you need to install and administer Windows Server 2019."
     },
@@ -96,20 +96,9 @@
       "released-date": "",
       "duration": "2h 28m",
       "completed-date": "Mar 8, 2019",
-      "img": "https://cdn.lynda.com/courses/713394-637199650247207712_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/713394-637242275122018674_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "Learn the essentials of Jenkins, the DevOps automation platform. Find how to automate builds, test and secure deployments, create a continuous integration and delivery..."
-    },
-    {
-      "title": "Introduction to AWS for Non-Engineers: 1 Cloud Concepts (2019)",
-      "link": "https://www.lynda.com/course-tutorials/Introduction-AWS-Non-Engineers-1-Cloud-Concepts/808676-2.html",
-      "author": "with Hiroko Nishimura",
-      "released-date": "",
-      "duration": "1h",
-      "completed-date": "Mar 6, 2019",
-      "img": "https://cdn.lynda.com/courses/808676-637207336283764508_270x480_thumb.jpg",
-      "linkedin": "",
-      "details": "Get a beginner-level introduction to Amazon Web Services. Learn the basic concepts about cloud computing while you explore the AWS platform and services."
+      "details": "Discover Jenkins, the DevOps automation platform. Find how to automate builds, test and secure deployments, create a continuous integration and delivery pipeline, and more."
     },
     {
       "title": "Go Essential Training",
@@ -151,7 +140,7 @@
       "released-date": "",
       "duration": "2h 11m",
       "completed-date": "Sep 30, 2018",
-      "img": "https://cdn.lynda.com/courses/661773-637202147225974622_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/661773-637243673611507591_270x480_thumb.jpg",
       "linkedin": "",
       "details": "Get started with Python, the popular and highly readable object-oriented language."
     },
@@ -173,9 +162,9 @@
       "released-date": "",
       "duration": "1h 35m",
       "completed-date": "May 20, 2018",
-      "img": "https://cdn.lynda.com/courses/573253-637199622719363603_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/573253-637242275384565704_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "Get started with MongoDB. Learn about the differences between relational and document databases, as well as how to work with the Mongo shell, build an application in Node.js..."
+      "details": "Get started with MongoDB. Learn about the differences between relational and document databases and how to work with the Mongo shell, build an application in Node.js, and..."
     },
     {
       "title": "Migrating from Python 2.7 to Python 3",
@@ -206,9 +195,9 @@
       "released-date": "",
       "duration": "23m 51s",
       "completed-date": "Nov 16, 2017",
-      "img": "https://cdn.lynda.com/courses/571622-637199710326561083_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/571622-637242271665826964_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "Join Lillian Pierson, P.E.—a leading expert in the field of big data and data science—as she shares observations and tips to help you embark on a career as a data scientist..."
+      "details": "Join Lillian Pierson, a leading expert in the field of big data and data science, as she shares observations and tips to help you embark on a career as a data scientist."
     },
     {
       "title": "Python for Data Science Tips, Tricks, & Techniques",
@@ -270,11 +259,11 @@
       "link": "https://www.lynda.com/Python-tutorials/Learning-Python-3-Standard-Library/550133-2.html",
       "author": "with Kathryn Hodge",
       "released-date": "",
-      "duration": "2h 9m",
+      "duration": "2h 10m",
       "completed-date": "Sep 26, 2017",
-      "img": "https://cdn.lynda.com/courses/550133-637231484619942398_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/550133-637248217288130774_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "Explore the Python 3 standard library. Learn how you can take advantage of the library's built-in modules to calculate statistics, format dates and times, get content from the..."
+      "details": "Explore the Python 3 standard library. Learn how to take advantage of its built-in modules to calculate statistics, format dates and times, get content from the internet, and more."
     },
     {
       "title": "Mastering Xamarin.Forms Development: 9 Advanced Push Notifications",
@@ -338,9 +327,9 @@
       "released-date": "",
       "duration": "50m 58s",
       "completed-date": "Sep 5, 2017",
-      "img": "https://cdn.lynda.com/courses/616720-637199712602168971_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/616720-637242274280710415_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "In this installment of the nine-part Mastering Xamarin.Forms Development series, learn how to leverage dependency services to include platform-specific functionality in your apps."
+      "details": "In this installment of the nine-part Mastering Xamarin.Forms Development series, learn how to use dependency services to include platform-specific functionality in your apps."
     },
     {
       "title": "Mastering Xamarin.Forms Development: 4 Binding, Command, and Converters",
@@ -371,9 +360,9 @@
       "released-date": "",
       "duration": "53m 12s",
       "completed-date": "Sep 2, 2017",
-      "img": "https://cdn.lynda.com/courses/604244-637199712075072252_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/604244-637242271746301974_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "In this course—the second in the Mastering Xamarin.Forms Development series—learn how to work with the controls built into Xamarin.Forms, and how to use plugins to add..."
+      "details": "In this course, the second in the series, learn how to work with the controls built into Xamarin.Forms and how to use plugins to add cross-platform functionality."
     },
     {
       "title": "Mastering Xamarin.Forms Development: 1 Pages, Layout, and Navigation",
@@ -393,9 +382,9 @@
       "released-date": "",
       "duration": "1h 22m",
       "completed-date": "Sep 2, 2017",
-      "img": "https://cdn.lynda.com/courses/473890-637199607356371812_270x480_thumb.jpg",
+      "img": "https://cdn.lynda.com/courses/473890-637242269671399072_270x480_thumb.jpg",
       "linkedin": "",
-      "details": "Learn how design patterns in C# can help you build better code quickly and resolve or prevent common design issues in code. Reynald Adolphe demonstrates how to..."
+      "details": "Learn how design patterns in C# can help you build better code. Discover how to implement Gang of Four patterns and two commonly used patterns in .NET."
     },
     {
       "title": "Nail Your C# Developer Interview",

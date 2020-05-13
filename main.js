@@ -104,18 +104,17 @@ function build_html(data, totalH, totalM) {
 
     htmlStr += "                  <a target=\"_blank\" href=\"" + entry['link'] + "\">\n";
     htmlStr += "                    " + entry['title'] + "\n";
-    htmlStr += "                  </a>\n";
+    htmlStr += "                  </a>  ";
+    htmlStr += "                <span>(" + entry['released-date'].replace('Updated ','') + " ... " + entry['duration'] + ")</span>\n";
     htmlStr += "                </li>\n";
     if (entry['linkedin']) {
       htmlStr += "                <li><a target=\"_blank\" href=\"" + entry['linkedin'] + "\">" + entry['author'] + "</a></li>\n";
     } else {
       htmlStr += "                <li>Author: " + entry['author'] + "</li>\n";
     }
-    htmlStr += "                <li>Released: " + entry['released-date'] + "</li>\n";
-    htmlStr += "                <li>Duration: " + entry['duration'] + "</li>\n";
-    htmlStr += "                <li>Completed: " + entry['completed-date'] + "</li>\n";
+    htmlStr += "                <li class=\"completed\"><i>Completed: " + entry['completed-date'].replace('Last Viewed','') + "</i></li>\n";
     htmlStr += "                <li class=\"details\">" + entry['details'] + "</li>\n";
-    htmlStr += "                <li><a href=\"#top\">top</a> / <a href=\"#bottom\">bottom</a></li>\n";
+    htmlStr += "                <li class=\"topbottom\"><a href=\"#top\">top</a> / <a href=\"#bottom\">bottom</a></li>\n";
     htmlStr += "              </ul>\n";
     htmlStr += "            </li>\n";
   });
@@ -140,10 +139,9 @@ function build_md(data, totalH, totalM) {
     mdStr += "\n";
     mdStr += "[" + entry['title'] + "](" + entry['link'] + ")\n";
     mdStr += "- Author: " + entry['author'] + "\n";
-    //mdStr += "- Released: " + entry['released-date'] + "\n";
-    mdStr += "- Duration: " + entry['duration'] + "\n";
-    mdStr += "- Completed: " + entry['completed-date'] + "\n";
-    mdStr += "- Details: " + entry['details'] + "\n";
+    mdStr += "- " + entry['released-date'] + "\n";
+    mdStr += "- " + entry['duration'] + "\n";
+    mdStr += "- " + entry['completed-date'] + "\n";
     mdStr += "- [top](#top) / [bottom](#bottom)\n";
 
     mdStr += "<br/>\n";
